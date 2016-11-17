@@ -1,0 +1,147 @@
+{
+   zmq_send
+   Memcheck:Param
+   socketcall.sendto(msg)
+   fun:send
+   fun:_ZN3zmq9mailbox_t4sendERKNS_9command_tE
+   ...
+}
+
+{
+   v8 Initialize Leaking
+   Memcheck:Leak
+   fun:_Znam
+   fun:_ZN2v88internal22ExternalReferenceTable13PopulateTableEv
+   fun:_ZN2v88internal24ExternalReferenceDecoderC1Ev
+   fun:_ZN2v88internal12Deserializer11DeserializeEv
+   fun:_ZN2v88internal2V810InitializeEPNS0_12DeserializerE
+   fun:_ZN2v88internal8Snapshot11DeserializeEPKhi
+   fun:_ZN2v88internal8Snapshot10InitializeEPKc
+   fun:_ZN2v82V810InitializeEv
+   fun:_ZN2v87Context3NewEPNS_22ExtensionConfigurationENS_6HandleINS_14ObjectTemplateEEENS3_INS_5ValueEEE
+   ...
+}
+
+{
+   v8 Debugger Initialize Leaking
+   Memcheck:Leak
+   fun:_Znam
+   fun:_ZN2v88internal19CommandMessageQueueC1Ei
+   fun:_ZN2v88internal26LockingCommandMessageQueueC1EPNS0_6LoggerEi
+   fun:_ZN2v88internal8DebuggerC1EPNS0_7IsolateE
+   fun:_ZN2v88internal7Isolate18InitializeDebuggerEv
+   fun:_ZN2v88internal7Isolate4InitEPNS0_12DeserializerE
+   fun:_ZN2v88internal8Snapshot11DeserializeEPKhi
+   fun:_ZN2v88internal8Snapshot10InitializeEPKc
+   ...
+}
+
+{
+   Logging framework memory leak
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
+   fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
+   fun:_ZNSsC1EPKcRKSaIcE
+   fun:_ZN10Datacratic7Logging12CategoryData7getRootEv
+   fun:_ZN10Datacratic7Logging12CategoryData6createEPKcS3_b
+   fun:_ZN10Datacratic7Logging8CategoryC1EPKcb
+   fun:_GLOBAL__sub_I_message_loop.cc
+   fun:call_init.part.0
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.15.so
+}
+
+{
+   Node exception throw leak one block
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
+   fun:_ZNSs9_M_mutateEmmm
+   fun:_ZNSs15_M_replace_safeEmmPKcm
+   fun:_ZN2ML20trace_exception_nodeEPvPKSt9type_info
+   fun:__cxa_throw
+   ...
+}
+
+{
+   tcmalloc trips valgrind
+   Memcheck:Param
+   msync(start)
+   fun:__msync_nocancel
+   obj:/usr/lib/libunwind.so*
+   fun:_ULx86_64_step
+   ...
+}
+
+{
+   tcmalloc trips valgrind
+   Memcheck:Param
+   msync(start)
+   fun:__msync_nocancel
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   obj:/usr/lib/x86_64-linux-gnu/libunwind.so.8.0.1
+   fun:_ULx86_64_step
+   fun:_Z13GetStackTracePPvii
+   fun:_ZN8tcmalloc8PageHeap8GrowHeapEm
+   fun:_ZN8tcmalloc8PageHeap3NewEm
+   fun:_ZN8tcmalloc15CentralFreeList8PopulateEv
+   fun:_ZN8tcmalloc15CentralFreeList18FetchFromSpansSafeEv
+   fun:_ZN8tcmalloc15CentralFreeList11RemoveRangeEPPvS2_i
+}
+
+{
+   Logging framework memory leak
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
+   fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
+   fun:_ZNSsC1EPKcRKSaIcE
+   fun:_ZN10Datacratic7Logging12CategoryData7getRootEv
+   fun:_ZN10Datacratic7Logging12CategoryData6createEPKcS3_b
+   fun:_ZN10Datacratic7Logging8CategoryC1EPKcb
+   fun:_GLOBAL__sub_I_message_loop.cc
+   fun:call_init.part.0
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.15.so
+}
+
+{
+   Logging::Category singletons
+   Memcheck:Leak
+   ...
+   fun:_ZN10Datacratic7Logging8CategoryC1EPKcS3_
+   ...
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.15.so
+}
+
+{
+   Logging::Category singletons
+   Memcheck:Leak
+   ...
+   fun:_ZN10Datacratic7Logging8CategoryC1EPKcb
+   ...
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.15.so
+}
+
+{
+   Logging framework memory leak again
+   Memcheck:Leak
+   fun:_Znwm
+   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
+   fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
+   fun:_ZNSsC1EPKcRKSaIcE
+   fun:_ZN10Datacratic7Logging12CategoryData7getRootEv
+   fun:_ZN10Datacratic7Logging12CategoryData6createEPKcS3_b
+   fun:_ZN10Datacratic7Logging8CategoryC1EPKcb
+   fun:__static_initialization_and_destruction_0
+   fun:_GLOBAL__sub_I_message_loop.cc
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.19.so
+}
